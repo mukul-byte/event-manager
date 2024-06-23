@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class RegisterEventResponseDto {
+public class RegisterUserResponseDto {
     private Long id;
     private String name;
     private String email;

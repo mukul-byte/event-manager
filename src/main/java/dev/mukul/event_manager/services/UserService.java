@@ -10,6 +10,10 @@ import dev.mukul.event_manager.models.User;
 import dev.mukul.event_manager.repositories.EventRepository;
 import dev.mukul.event_manager.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -23,9 +27,13 @@ public class UserService {
     @Autowired
     private EventRepository eventRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     public User createUser(User userDetails) {
         userDetails.setRole(Role.USER);
+        userDetails.setPassword(passwordEncoder.encode(userDetails.getPassword()));
 
         return this.userRepository.save(userDetails);
     }
@@ -51,4 +59,5 @@ public class UserService {
         user.get().getRegisteredEvents().add(event.get());
         return this.userRepository.save(user.get());
     }
+
 }
