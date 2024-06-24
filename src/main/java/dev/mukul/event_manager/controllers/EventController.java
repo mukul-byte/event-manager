@@ -1,7 +1,6 @@
 package dev.mukul.event_manager.controllers;
 
 import dev.mukul.event_manager.models.Event;
-import dev.mukul.event_manager.repositories.EventRepository;
 import dev.mukul.event_manager.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +17,6 @@ public class EventController {
 
     @PostMapping("/")
     public Event createEvent(@RequestBody  Event event){
-        System.out.println("1111" + event);
         return this.eventService.create(event);
     }
 }

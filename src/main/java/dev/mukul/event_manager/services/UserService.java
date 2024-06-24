@@ -32,7 +32,7 @@ public class UserService {
 
 
     public User createUser(User userDetails) {
-        userDetails.setRole(Role.USER);
+        userDetails.setRole(Role.ROLE_USER);
         userDetails.setPassword(passwordEncoder.encode(userDetails.getPassword()));
 
         return this.userRepository.save(userDetails);
@@ -60,4 +60,7 @@ public class UserService {
         return this.userRepository.save(user.get());
     }
 
+    public User findUser(String email) {
+        return this.userRepository.findByEmail(email);
+    }
 }
